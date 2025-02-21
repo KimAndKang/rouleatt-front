@@ -2,12 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --background: #171617;
+}
+
 body {
+  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
 
 @layer base {
-  :root {
-    --radius: 0.5rem;
-  }
 }
