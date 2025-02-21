@@ -6,11 +6,8 @@ export default function Home() {
 
   useEffect(() => {
     const kakao = window?.kakao
-    console.log("?", kakaoMapContainer)
-    console.log("?", kakao)
     if (kakaoMapContainer?.current && typeof kakao !== "undefined") {
       const container = kakaoMapContainer.current
-      console.log("fuck")
       kakao.maps.load(() => {
         const options = {
           center: new kakao.maps.LatLng(33.450701, 126.570667),
