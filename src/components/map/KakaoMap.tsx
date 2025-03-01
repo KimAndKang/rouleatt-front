@@ -23,7 +23,7 @@ export default function KakaoMap({ myLocation, ...htmlAttributes }: Params) {
 
     marker.setMap(kakaoMap)
     kakaoMap.setCenter(markerPosition)
-  }, [myLocation, kakaoMapContainer.current])
+  }, [myLocation?.lat, myLocation?.lng, kakaoMap])
 
   useEffect(() => {
     const kakao = window?.kakao
@@ -37,6 +37,14 @@ export default function KakaoMap({ myLocation, ...htmlAttributes }: Params) {
 
         const map = new kakao.maps.Map(container, options)
         setkakaoMap(map)
+        if (!myLocation) return
+        const markerPosition = new kakao.maps.LatLng(myLocation.lat, myLocation.lng)
+        const marker = new kakao.maps.Marker({
+          position: markerPosition
+        })
+
+        marker.setMap(map)
+        map.setCenter(markerPosition)
       })
     }
   }, [kakaoMapContainer])
