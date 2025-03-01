@@ -3,18 +3,19 @@ import KakaoMap from "@/components/map/KakaoMap"
 import useGeolocation from "@/hooks/useGeolocation"
 import { useEffect } from "react"
 
-const getRestraunts = () => {
-  return fetch("http://localhost:8080/restaurants/nearby?x=127.12909643077252&y=37.41204078264615&d=100")
+const getRestraunts = (lat: number, lng: number) => {
+  return fetch(`/api/restraunts?lat=${lat}&lng=${lng}`)
 }
 
 export default function KakaoMapPage() {
   const { loaded, coordinates, error } = useGeolocation()
-  // useEffect(() => {
-  //   ;async () => {
-  //     const res = await getRestraunts()
-  //     console.log("res", res)
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (!(coordinates?.lat && coordinates?.lng)) return
+    getRestraunts(coordinates.lat, coordinates.lng).then(async (data) => {
+      const res = await data.json()
+      console.log("data", res)
+    })
+  }, [coordinates])
   return (
     <div>
       <KakaoMap
