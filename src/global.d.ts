@@ -5,8 +5,13 @@ declare global {
     getLng(): number
   }
 
-  class Map {
+  class KaoKaoMap {
     constructor(container: HTMLDivElement, options: MapOptions)
+    setCenter(latLng: LatLng): void
+  }
+  class Marker {
+    constructor({ position: LatLng })
+    setMap(map: KaoKaoMap): void
   }
 
   type MapOptions = {
@@ -17,7 +22,8 @@ declare global {
     kakao: {
       maps: {
         LatLng: typeof LatLng
-        Map: typeof Map
+        Map: typeof KaoKaoMap
+        Marker: typeof Marker
         load: (fn: () => void) => void
       }
     }
